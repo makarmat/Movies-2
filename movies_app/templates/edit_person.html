@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Person</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<h1>Edit person: {{ person.first_name }} {{ person.last_name }}</h1>
+
+<div>
+            <form class="person_form" method="post" action="/edit_person/{{ person.id }}/">{% csrf_token %}
+                <label>First name:</label>
+                <input name="first_name" type="text" maxlength="32" value="{{ person.first_name }}"/><br>
+                <label>Last name:</label>
+                <input name="last_name" type="text" maxlength="32" value="{{ person.last_name }}"/><br>
+                <button type="submit" name="action" value="update">Update</button><br>
+                <button type="submit" name="action" value="return_list">Return to people list</button><br>
+            </form>
+</div>
+</body>
+</html>

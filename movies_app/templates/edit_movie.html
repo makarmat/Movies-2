@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Movie</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<h1>Edit movie: {{ movie.title }}</h1>
+
+<div>
+            <form class="movie_form" method="post" action="/edit_movie/{{ movie.id }}">{% csrf_token %}
+                <label>Title:</label>
+                <input name="title" type="text" maxlength="128" value="{{ movie.title }}"/>
+                <br>
+                <label>Year:</label>
+                <input name="year" type="number" minlength="4" maxlength="4" value="{{ movie.year }}"/>
+                <br>
+                <label>Director name:</label>
+                <input name="director_1" type="text" maxlength="32" value="{{ movie.director.first_name }}"/>
+                <input name="director_2" type="text" maxlength="32" value="{{ movie.director.last_name }}"/><br>
+                <label>Screenplay:</label>
+                <input name="screenplay_fn" type="text" maxlength="32" value="{{ movie.screenplay.first_name }}"/>
+                <input name="screenplay_ln" type="text" maxlength="32" value="{{ movie.screenplay.last_name }}"/><br>
+                <label>Rating:</label>
+                <input name="rating" type="number" step="0.1" min="0" max="10" value="{{ movie.rating }}"/><br>
+                <button type="submit" name="action" value="update">Update</button><br>
+            </form>
+
+                <label>Genre:</label>
+                {% for g in genre %}
+                <form class="genre_form" method="post" action="/edit_movie/{{ movie.id }}">{% csrf_token %}
+                <input name="genre" type="text" maxlength="32" value="{{ g.name }}"/>
+                <input name="genre_id" type="hidden" value="{{ g.id }}"/>
+                <button type="submit" name="action" value="genre_save">Save</button><br><br>
+                {% endfor %}
+                <input name="add_genre" type="text" maxlength="32" placeholder="add genre..."/>
+                <button type="submit" name="action" value="add_save">Add</button><br><br>
+                <br>
+            </form>
+
+                <label>Starring:</label><br>
+                <ul>
+                {% for r in roles %}
+                    <form class="starring_form" method="post" action="/edit_movie/{{ movie.id }}">{% csrf_token %}
+                    <li>
+                    <input name="star_fn" type="text" maxlength="32" value="{{ r.person.first_name }}"/>
+                    <input name="star_ln" type="text" maxlength="32" value="{{ r.person.last_name }}"/>
+                    <input name="role_id" id="{{ r.id }}" type="number" value="{{ r.id }}"/>
+                        <a></a>
+                        <a>As: </a>
+                        <input name="role" type="text" maxlength="128" value="{{ r.role }}"/>
+                        <button type="submit" name="action" value="star_save">Save</button><br><br>
+                    </li>
+
+                    </form>
+                {% endfor %}
+                </ul>
+
+                <form class="add_actor_form" method="post" action="/edit_movie/{{ movie.id }}">{% csrf_token %}
+                <input name="add_fn" type="text" maxlength="32" placeholder="add first name..."/>
+                <input name="add_ln" type="text" maxlength="32" placeholder="add last name..."/><br>
+                <button type="submit" name="action" value="add_actor">Add actor</button><br><br>
+                <button type="submit" name="action" value="return_list">Return to movie list</button>
+                </form><br>
+
+
+
+</div>
+</body>
+</html>

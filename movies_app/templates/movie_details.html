@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<br>
+
+
+<h1>{{ movie.title }} ({{ movie.year }})</h1><br>
+<h3>Director: {{ movie.director.first_name }} {{ movie.director.last_name }}</h3>
+<h3>Screenplay: {{ movie.screenplay.first_name }} {{ movie.screenplay.last_name }}</h3>
+<h3>Rating: {{ movie.rating }}</h3></br>
+
+<h3>Genre: </h3>
+{% for g in genre %}
+<h3>{{ g.name }}</h3>
+{% endfor %}
+
+<table class="table table-dark">
+
+    <tr>
+        <th>Starring</th>
+        <th>As</th>
+
+    </tr>
+    {% for r in roles %}
+    <tr>
+
+        <td><a>{{ r.person.first_name }} </a><a>{{ r.person.last_name }}</a></td>
+        <td>{{ r.role }}</td>
+
+    </tr>
+    {% endfor %}
+
+
+</table>
+</body>
+</html>

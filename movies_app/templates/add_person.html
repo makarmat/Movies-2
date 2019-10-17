@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Person</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+<h1>Add person</h1>
+
+<div>
+            <form class="add_person_form" method="post" action="/add_person/">{% csrf_token %}
+                <label>First name:</label>
+                <input name="first_name" type="text" maxlength="32" placeholder="first name..."/><br>
+                <label>Last name:</label>
+                <input name="last_name" type="text" maxlength="32" placeholder="last name..."/><br>
+                <button type="submit" name="action" value="add">Add</button><br>
+            </form>
+</div>
+</body>
+</html>
